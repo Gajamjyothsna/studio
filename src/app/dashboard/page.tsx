@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,20 +10,31 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookCopy, User, LogOut } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { BookCopy, User, LogOut, ArrowRight } from "lucide-react";
 
 export default function DashboardPage() {
   const roadmaps = [
     {
       title: "Full Stack Developer Roadmap",
       description: "A comprehensive guide to becoming a full stack developer.",
-      link: "#",
+      link: "https://google.com",
+      image: "https://picsum.photos/600/400",
+      imageHint: "code development",
     },
     {
       title: "Java Developer Roadmap",
       description: "Your path to becoming a proficient Java developer.",
-      link: "#",
+      link: "https://google.com",
+      image: "https://picsum.photos/600/400",
+      imageHint: "code java",
     },
   ];
 
@@ -68,22 +80,36 @@ export default function DashboardPage() {
       <main className="flex-1 p-4 md:p-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {roadmaps.map((roadmap) => (
-            <Link
+            <Card
               key={roadmap.title}
-              href={roadmap.link}
-              className="block rounded-lg border bg-card text-card-foreground shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+              className="flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm transition-all hover:shadow-lg"
             >
-              <Card className="h-full border-0">
-                <CardHeader>
-                  <CardTitle>{roadmap.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    {roadmap.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
+              <CardHeader>
+                <CardTitle>{roadmap.title}</CardTitle>
+                <CardDescription className="text-sm text-muted-foreground">
+                  {roadmap.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <div className="relative h-48 w-full overflow-hidden rounded-md">
+                  <Image
+                    src={roadmap.image}
+                    alt={roadmap.title}
+                    fill
+                    className="object-cover"
+                    data-ai-hint={roadmap.imageHint}
+                  />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button asChild className="w-full">
+                  <Link href={roadmap.link} target="_blank">
+                    Open Doc
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
       </main>
