@@ -40,10 +40,10 @@ export function LoginForm() {
     console.log(values);
     toast({
       title: "Login Successful",
-      description: "Welcome back! (This is a simulation)",
+      description: "Welcome back!",
     });
-    // On successful login, you would typically redirect to a dashboard
-    // router.push("/dashboard");
+    // On successful login, redirect to the dashboard
+    router.push("/dashboard");
   }
 
   return (
