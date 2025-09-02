@@ -6,9 +6,10 @@ export const roadmaps = [
     image: "https://picsum.photos/600/400",
     imageHint: "code development",
     documents: [
-      { title: "Frontend Fundamentals", link: "https://google.com" },
-      { title: "Backend Development", link: "https://google.com" },
-      { title: "DevOps Essentials", link: "https://google.com" },
+      {
+        title: "📅 12-Week Study + Project Plan (MERN Full Stack UI Engineer)",
+        link: "https://google.com",
+      },
     ],
   },
   {
