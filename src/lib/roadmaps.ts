@@ -7,7 +7,7 @@ export const roadmaps = [
     imageHint: "code development",
     documents: [
       {
-        title: "📅 12-Week Study + Project Plan (MERN Full Stack UI Engineer)",
+        title: "WEB DEV SHEET",
         link: "https://google.com",
       },
     ],
