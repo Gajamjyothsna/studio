@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,14 +13,20 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BookCopy, User, LogOut, ArrowRight } from "lucide-react";
+import { BookCopy, User, LogOut, ArrowLeft, FileText } from "lucide-react";
 import { roadmaps } from "@/lib/roadmaps";
+import { notFound } from "next/navigation";
 
-export default function DashboardPage() {
+export default function RoadmapPage({ params }: { params: { slug: string } }) {
+  const roadmap = roadmaps.find((r) => r.slug === params.slug);
+
+  if (!roadmap) {
+    notFound();
+  }
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6">
@@ -62,39 +67,41 @@ export default function DashboardPage() {
         </DropdownMenu>
       </header>
       <main className="flex-1 p-4 md:p-8">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {roadmaps.map((roadmap) => (
-            <Card
-              key={roadmap.title}
-              className="flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm transition-all hover:shadow-lg"
-            >
-              <CardHeader>
-                <CardTitle>{roadmap.title}</CardTitle>
-                <CardDescription className="text-sm text-muted-foreground">
-                  {roadmap.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <div className="relative h-48 w-full overflow-hidden rounded-md">
-                  <Image
-                    src={roadmap.image}
-                    alt={roadmap.title}
-                    fill
-                    className="object-cover"
-                    data-ai-hint={roadmap.imageHint}
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button asChild className="w-full">
-                  <Link href={`/dashboard/roadmap/${roadmap.slug}`}>
-                    View Roadmap
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+        <div className="mb-6">
+          <Button asChild variant="ghost">
+            <Link href="/dashboard">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Dashboard
+            </Link>
+          </Button>
+        </div>
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="text-3xl">{roadmap.title}</CardTitle>
+            <CardDescription>{roadmap.description}</CardDescription>
+          </CardHeader>
+        </Card>
+        <div className="grid gap-4">
+          <h2 className="text-2xl font-bold">Documents</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {roadmap.documents.map((doc) => (
+              <Card key={doc.title}>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4">
+                    <FileText className="h-8 w-8 text-primary" />
+                    <div>
+                      <h3 className="font-semibold">{doc.title}</h3>
+                      <Button asChild variant="link" className="p-0 h-auto">
+                        <Link href={doc.link} target="_blank">
+                          Open Document
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </main>
     </div>
