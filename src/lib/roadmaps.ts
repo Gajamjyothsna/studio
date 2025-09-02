@@ -10,6 +10,10 @@ export const roadmaps = [
         title: "WEB DEV SHEET",
         link: "https://google.com",
       },
+      {
+        title: "📅 12-Week Study + Project Plan (MERN Full Stack UI Engineer)",
+        link: "https://google.com",
+      },
     ],
   },
   {
