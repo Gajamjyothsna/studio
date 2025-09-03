@@ -20,6 +20,13 @@ import { BookCopy, User, LogOut, ArrowLeft, FileText } from "lucide-react";
 import { roadmaps } from "@/lib/roadmaps";
 import { notFound } from "next/navigation";
 
+// 👇 Add this function
+export async function generateStaticParams() {
+  return roadmaps.map((roadmap) => ({
+    slug: roadmap.slug,
+  }));
+}
+
 export default function RoadmapPage({ params }: { params: { slug: string } }) {
   const roadmap = roadmaps.find((r) => r.slug === params.slug);
 
