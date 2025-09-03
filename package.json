@@ -12,7 +12,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
+    "postbuild": "mkdir -p out/_next && cp -r .next/static out/_next/",
+    "deploy": "npm run build && gh-pages -d out"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.14.1",
