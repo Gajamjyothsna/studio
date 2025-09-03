@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://gajamjyothsna.github.io/studio",
-  "scripts": {
-    "dev": "next dev --turbopack -p 9002",
-    "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
-    "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
-    "build": "next build && next export",
-    "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "predeploy": "npm run build",
-    "postbuild": "mkdir -p out/_next && cp -r .next/static out/_next/",
-    "deploy": "npm run build && gh-pages -d out"
-  },
+"scripts": {
+  "dev": "next dev --turbopack -p 9002",
+  "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
+  "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "typecheck": "tsc --noEmit",
+  "predeploy": "npm run build",
+  "postbuild": "mkdir -p out/_next && cp -r .next/static out/_next/",
+  "deploy": "gh-pages -d out"
+   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.14.1",
     "@genkit-ai/next": "^1.14.1",
